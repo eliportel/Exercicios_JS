@@ -1,0 +1,62 @@
+<script>
+    /*
+ * Crie uma função que calcule o ponto de encontro de dois objetos em movimento
+ * em duas dimensões.
+ * - Cada objeto é composto por uma coordenada xy e uma velocidade de deslocamento
+ *   (vetor de deslocamento) por unidade de tempo (também no formato xy).
+ * - A função receberá as coordenadas iniciais de ambos os objetos e suas velocidades.
+ * - A função calculará e mostrará o ponto em que eles se encontram e o tempo que
+ *   levarão para se encontrar.
+ * - A função deve levar em consideração que os objetos podem não se encontrar.
+ */
+// Função para calcular o ponto de encontro de dois objetos
+function calcularPontoDeEncontro(coordenadaObjeto1, velocidadeObjeto1, coordenadaObjeto2, velocidadeObjeto2) {
+    // As variáveis de entrada representam as coordenadas iniciais e as velocidades dos dois objetos.
+    // coordenadaObjeto1 = [x1, y1], coordenadaObjeto2 = [x2, y2]
+    // velocidadeObjeto1 = [vx1, vy1], velocidadeObjeto2 = [vx2, vy2]
+    
+    // Calculando a diferença entre as coordenadas dos dois objetos
+    const dx = coordenadaObjeto2[0] - coordenadaObjeto1[0]; // Diferença no eixo x
+    const dy = coordenadaObjeto2[1] - coordenadaObjeto1[1]; // Diferença no eixo y
+
+    // Calculando a diferença nas velocidades dos objetos
+    const dvx = velocidadeObjeto2[0] - velocidadeObjeto1[0]; // Diferença na velocidade no eixo x
+    const dvy = velocidadeObjeto2[1] - velocidadeObjeto1[1]; // Diferença na velocidade no eixo y
+
+    // Caso a diferença de velocidades seja zero, os objetos têm velocidades iguais e não se encontrarão
+    if (dvx === 0 && dvy === 0) {
+        console.log("Os objetos estão em movimento paralelo e não irão se encontrar.");
+        return;
+    }
+
+    // Calculando o tempo de encontro (t) resolvendo o sistema de equações:
+    // dx = dvx * t  e  dy = dvy * t
+    // Ou seja: t = dx / dvx e t = dy / dvy
+    let tempoDeEncontroX = dx / dvx; // Tempo para o encontro no eixo x
+    let tempoDeEncontroY = dy / dvy; // Tempo para o encontro no eixo y
+
+    // Verificando se os tempos calculados são iguais (os objetos se encontrarão ao mesmo tempo)
+    if (tempoDeEncontroX === tempoDeEncontroY) {
+        let tempo = tempoDeEncontroX; // Tempo para o encontro
+        let pontoDeEncontroX = coordenadaObjeto1[0] + velocidadeObjeto1[0] * tempo; // Ponto de encontro no eixo x
+        let pontoDeEncontroY = coordenadaObjeto1[1] + velocidadeObjeto1[1] * tempo; // Ponto de encontro no eixo y
+
+        // Exibindo o ponto de encontro e o tempo
+        console.log(`Os objetos se encontrarão no ponto (${pontoDeEncontroX}, ${pontoDeEncontroY}) após ${tempo} unidades de tempo.`);
+    } else {
+        // Se os tempos não forem iguais, os objetos não se encontrarão
+        console.log("Os objetos não se encontrarão, pois os tempos para o encontro nos eixos x e y são diferentes.");
+    }
+}
+
+// Testando a função
+let coordenadaObjeto1 = [0, 0]; // Coordenada inicial do objeto 1 (x1, y1)
+let velocidadeObjeto1 = [1, 2]; // Velocidade do objeto 1 (vx1, vy1)
+
+let coordenadaObjeto2 = [5, 6]; // Coordenada inicial do objeto 2 (x2, y2)
+let velocidadeObjeto2 = [1, 2]; // Velocidade do objeto 2 (vx2, vy2)
+
+// Chamando a função para calcular o ponto de encontro
+calcularPontoDeEncontro(coordenadaObjeto1, velocidadeObjeto1, coordenadaObjeto2, velocidadeObjeto2);
+
+</script>
